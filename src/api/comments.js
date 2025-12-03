@@ -1,0 +1,1 @@
+import { db } from './firebase';import { doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';export async function addComment(postId, comment){await updateDoc(doc(db,'posts',postId),{comments:arrayUnion(comment)});}export async function getComments(postId){const docSnap=await getDoc(doc(db,'posts',postId));return docSnap.exists()?docSnap.data().comments||[]:[];}

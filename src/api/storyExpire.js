@@ -1,0 +1,1 @@
+import { db } from './firebase';import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';export async function expireStories(){const snap=await getDocs(collection(db,'stories'));const now=Date.now();snap.docs.forEach(async d=>{const data=d.data();if(data.createdAt?.toMillis && now-data.createdAt.toMillis()>86400000){await deleteDoc(doc(db,'stories',d.id));}});

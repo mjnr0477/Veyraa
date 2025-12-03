@@ -1,0 +1,1 @@
+import { db } from './firebase';import { collection, query, where, getDocs } from 'firebase/firestore';export async function searchUsers(name){const q=query(collection(db,'users'),where('name','>=',name),where('name','<=',name+'\uf8ff'));const snap=await getDocs(q);return snap.docs.map(doc=>({id:doc.id,...doc.data()}));}
